@@ -27,11 +27,11 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = useCallback(
-    async (email, password) => {
+    async (identifier, password) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await loginApi({ email, password });
+        const response = await loginApi({ identifier, password });
         const { user, token } = response.data.data;
         handleAuthSuccess({ user, token });
         return { success: true, user };
@@ -67,11 +67,11 @@ export function AuthProvider({ children }) {
   );
 
   const googleLogin = useCallback(
-    async (secret) => {
+    async (idToken) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await googleLoginApi(secret);
+        const response = await googleLoginApi(idToken);
         const { user, token } = response.data.data;
         handleAuthSuccess({ user, token });
         return { success: true, user };

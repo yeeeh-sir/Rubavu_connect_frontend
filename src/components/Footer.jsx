@@ -4,7 +4,7 @@ import logo from '../logo.png';
 
 export default function Footer() {
     return (
-        <footer className="brand-gradient mt-auto text-white">
+        <footer className="brand-gradient mt-auto hidden text-white md:block">
             <div className="container-app grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
                 <div>
                     <Link to="/" className="flex items-center gap-3">

@@ -16,9 +16,8 @@
   }
 
   body {
-    @apply bg-[#f5f9f7] text-[#14213d] antialiased;
+    @apply bg-[#f6f8fb] text-[#14213d] antialiased;
     font-family: 'Manrope', 'Inter', system-ui, sans-serif;
-    background-image: radial-gradient(circle at 10% 0%, rgba(20, 100, 210, 0.06), transparent 25rem), radial-gradient(circle at 90% 10%, rgba(24, 168, 74, 0.06), transparent 22rem);
   }
 
   button,
@@ -76,11 +75,43 @@
   }
 
   .nav-item {
-    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors;
+    @apply relative flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-[15px] font-semibold text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-primary-700;
   }
 
   .nav-item-active {
-    @apply bg-primary-50 text-primary-700 font-bold;
+    @apply bg-primary-50 text-primary-700;
+  }
+
+  .nav-item-active::before {
+    content: '';
+    position: absolute;
+    left: -0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 58%;
+    border-radius: 0 4px 4px 0;
+    background: #1464d2;
+  }
+
+  .mobile-nav-item {
+    @apply relative flex flex-col items-center justify-center gap-0.5 px-3 py-2.5 text-[10px] font-semibold text-slate-500 transition-colors hover:text-slate-700;
+  }
+
+  .mobile-nav-item-active {
+    @apply text-primary-600;
+  }
+
+  .mobile-nav-item-active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: #1464d2;
   }
 
   .skeleton {
@@ -95,6 +126,35 @@
 /* Brand */
 .brand-gradient {
   background: linear-gradient(120deg, #063b78 0%, #1464d2 55%, #18a84a 100%);
+}
+
+/* Home welcome hero */
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #063b78 0%, #1464d2 65%, #1b74dc 100%);
+}
+
+.home-hero::before {
+  content: '';
+  position: absolute;
+  top: -6rem;
+  right: -4rem;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.home-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -7rem;
+  left: 18%;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 9999px;
+  background: rgba(147, 197, 253, 0.16);
 }
 
 .headline-font {
@@ -247,4 +307,69 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================
+   LOGIN PAGE - Carousel & Form
+   ========================================== */
+
+/* Slow Ken Burns zoom for active carousel image */
+.rc-slide-zoom {
+  transform: scale(1);
+}
+
+.rc-slide-zoom--animate {
+  animation: rcZoom 5.4s ease-out forwards;
+}
+
+@keyframes rcZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+/* Fade/slide-up entrance for promo copy on slide change */
+.rc-copy {
+  animation: rcCopyIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rcCopyIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Soft entrance for login card */
+.rc-card {
+  animation: rcCardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rcCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Camera, Save } from 'lucide-react';
+import { Camera, Phone, Save } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { updateProfile, uploadProfileImage } from '../api/users';
 import { getErrorMessage } from '../utils/format';
@@ -8,7 +8,7 @@ import { getErrorMessage } from '../utils/format';
 export default function EditProfile() {
   const { user, setUser, refreshUser } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ full_name: '', username: '', bio: '', interests: '' });
+  const [form, setForm] = useState({ full_name: '', username: '', email: '', phone_number: '', bio: '', interests: '' });
   const [loading, setLoading] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [error, setError] = useState(null);
@@ -27,6 +27,8 @@ export default function EditProfile() {
       setForm({
         full_name: user.full_name || '',
         username: user.username || '',
+        email: user.email || '',
+        phone_number: user.phone_number || '',
         bio: user.bio || '',
         interests,
       });
@@ -81,6 +83,12 @@ export default function EditProfile() {
     if (!form.username.trim()) newErrors.username = 'Username is required';
     else if (form.username.length < 3) newErrors.username = 'Username must be at least 3 characters';
     else if (!/^[a-zA-Z0-9_.]+$/.test(form.username)) newErrors.username = 'Only letters, numbers, dots, and underscores';
+    if (!form.email.trim()) newErrors.email = 'Email is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) newErrors.email = 'Enter a valid email address';
+    if (form.phone_number.trim()) {
+      const phone = form.phone_number.trim().replace(/[()\s.-]/g, '');
+      if (!/^\+?\d{7,15}$/.test(phone)) newErrors.phone_number = 'Enter a valid phone number with 7 to 15 digits';
+    }
     if (form.bio.length > 500) newErrors.bio = 'Bio must be under 500 characters';
     return newErrors;
   };
@@ -99,6 +107,8 @@ export default function EditProfile() {
       const res = await updateProfile({
         full_name: form.full_name.trim(),
         username: form.username.trim(),
+        email: form.email.trim(),
+        phone_number: form.phone_number.trim() || null,
         bio: form.bio.trim(),
         interests: form.interests.split(',').map((i) => i.trim()).filter(Boolean),
       });
@@ -197,6 +207,41 @@ export default function EditProfile() {
             className={`input ${errors.username ? 'border-red-400' : ''}`}
           />
           {errors.username && <p className="text-xs text-red-500 mt-1">{errors.username}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="email" className="label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`input ${errors.email ? 'border-red-400' : ''}`}
+          />
+          {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="phone_number" className="label">Phone number</label>
+          <div className="relative">
+            <Phone size={17} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+            <input
+              type="tel"
+              id="phone_number"
+              name="phone_number"
+              autoComplete="tel"
+              value={form.phone_number}
+              onChange={handleChange}
+              className={`input pl-11 ${errors.phone_number ? 'border-red-400' : ''}`}
+              placeholder="+250 7xx xxx xxx"
+            />
+          </div>
+          {errors.phone_number ? (
+            <p className="mt-1 text-xs text-red-500">{errors.phone_number}</p>
+          ) : (
+            <p className="mt-1 text-xs text-slate-400">Add a number to use it when you log in.</p>
+          )}
         </div>
 
         <div>

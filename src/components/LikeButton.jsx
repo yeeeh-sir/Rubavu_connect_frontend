@@ -32,7 +32,11 @@ export default function LikeButton({ postId, initialLiked, initialCount, onUpdat
     } catch (err) {
       setLiked(wasLiked);
       setCount((c) => (wasLiked ? c + 1 : c - 1));
-      setError(getErrorMessage(err, 'Unable to update like'));
+      setError(
+        err?.code === 'ERR_NETWORK'
+          ? 'Unable to reach the serverheck your connection and try again.'
+          : getErrorMessage(err, 'Unable to update like')
+      );
     } finally {
       setLoading(false);
       inFlight.current = false;
@@ -53,6 +57,11 @@ export default function LikeButton({ postId, initialLiked, initialCount, onUpdat
         <Heart size={22} fill={liked ? 'currentColor' : 'none'} />
       </button>
       <span className="text-sm font-medium text-slate-700">{formatCount(count)}</span>
+      {error && (
+        <span className="text-xs text-red-600" role="alert">
+          {error}
+        </span>
+      )}
     </div>
   );
 }

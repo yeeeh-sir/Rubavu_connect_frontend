@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Search, Plus, MessageCircle, User } from 'lucide-react';
+import { Home, Search, Plus, MessageCircle, UserRound } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const navItems = [
@@ -27,9 +27,7 @@ export default function MobileNav() {
             to={user ? to : to}
             end={end}
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center gap-1 px-3 py-2.5 text-[10px] font-medium ${
-                isActive ? 'text-primary-600' : 'text-slate-500 hover:text-slate-700'
-              }`
+              `mobile-nav-item${isActive ? ' mobile-nav-item-active' : ''}`
             }
             aria-label={label}
           >
@@ -42,12 +40,12 @@ export default function MobileNav() {
           <button
             type="button"
             onClick={() => setCreateOpen((o) => !o)}
-            className="-mt-6 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-accent-500 to-accent-700 text-white shadow-lg shadow-accent-500/30 active:scale-95 transition-transform"
+            className="mobile-create-button"
             aria-label="Create"
           >
             <Plus size={26} />
           </button>
-          <span className="text-[10px] font-medium text-slate-500 mt-0.5">Create</span>
+          <span className="mobile-create-label">Create</span>
           {createOpen && (
             <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-44 bg-white rounded-2xl border border-slate-100 shadow-xl z-50 py-2 overflow-hidden animate-fade-in">
               {createItems.map((item) => (
@@ -67,9 +65,7 @@ export default function MobileNav() {
         <NavLink
           to="/messages"
           className={({ isActive }) =>
-            `flex flex-col items-center justify-center gap-1 px-3 py-2.5 text-[10px] font-medium ${
-              isActive ? 'text-primary-600' : 'text-slate-500 hover:text-slate-700'
-            }`
+            `mobile-nav-item${isActive ? ' mobile-nav-item-active' : ''}`
           }
           aria-label="Messages"
         >
@@ -79,13 +75,11 @@ export default function MobileNav() {
         <NavLink
           to={user ? `/profile/${user.username}` : '/profile'}
           className={({ isActive }) =>
-            `flex flex-col items-center justify-center gap-1 px-3 py-2.5 text-[10px] font-medium ${
-              isActive ? 'text-primary-600' : 'text-slate-500 hover:text-slate-700'
-            }`
+            `mobile-nav-item${isActive ? ' mobile-nav-item-active' : ''}`
           }
           aria-label="Profile"
         >
-          <User size={22} />
+          <UserRound size={21} />
           Profile
         </NavLink>
       </div>

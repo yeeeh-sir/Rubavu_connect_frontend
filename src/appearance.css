@@ -1,0 +1,201 @@
+html.dark body {
+  background-color: #0b1220;
+  color: #e2e8f0;
+}
+
+html.dark [class~="bg-white"] {
+  background-color: #111c2e !important;
+}
+
+html.dark [class~="bg-slate-50"] {
+  background-color: #111c2e !important;
+}
+
+html.dark [class~="bg-slate-100"] {
+  background-color: #1e293b !important;
+}
+
+html.dark [class~="bg-slate-200"] {
+  background-color: #334155 !important;
+}
+
+html.dark [class~="bg-primary-50"],
+html.dark [class~="bg-blue-50"] {
+  background-color: #142b49 !important;
+}
+
+html.dark [class~="bg-primary-100"],
+html.dark [class~="bg-blue-100"] {
+  background-color: #19365a !important;
+}
+
+html.dark [class~="text-slate-900"] {
+  color: #f1f5f9 !important;
+}
+
+html.dark [class~="text-slate-800"] {
+  color: #e2e8f0 !important;
+}
+
+html.dark [class~="text-slate-700"] {
+  color: #cbd5e1 !important;
+}
+
+html.dark [class~="text-slate-600"],
+html.dark [class~="text-slate-500"] {
+  color: #a7b4c7 !important;
+}
+
+html.dark [class~="text-slate-400"] {
+  color: #94a3b8 !important;
+}
+
+html.dark [class~="border-slate-100"],
+html.dark [class~="border-slate-200"],
+html.dark [class~="border-slate-300"] {
+  border-color: #29384d !important;
+}
+
+html.dark [class~="divide-slate-100"] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #29384d !important;
+}
+
+html.dark [class~="hover:bg-slate-50"]:hover,
+html.dark [class~="hover:bg-slate-100"]:hover {
+  background-color: #1e293b !important;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  border-color: #3a4a60;
+  background-color: #0f1929;
+  color: #e2e8f0;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #8291a6;
+}
+
+html.dark .site-header,
+html.dark .app-sidebar,
+html.dark .mobile-menu-panel,
+html.dark .header-dropdown {
+  border-color: #26354a;
+  background-color: #111c2e;
+}
+
+html.dark .site-brand,
+html.dark .profile-menu-button,
+html.dark .header-icon-button,
+html.dark .profile-dropdown-link,
+html.dark .sidebar-logout {
+  color: #cbd5e1;
+}
+
+html.dark .profile-dropdown-user strong,
+html.dark .sidebar-account strong {
+  color: #e2e8f0;
+}
+
+html.dark .profile-dropdown-user,
+html.dark .sidebar-footer,
+html.dark .sidebar-account {
+  border-color: #29384d;
+}
+
+html.dark .create-menu-item:hover,
+html.dark .profile-dropdown-link:hover {
+  background-color: #1e293b;
+}
+
+html.dark .home-welcome {
+  border-color: #263c5a;
+  background: radial-gradient(ellipse at 88% 7%, rgba(54, 92, 143, 0.32), transparent 23rem), linear-gradient(118deg, #132641 0%, #14243b 55%, #172b47 100%);
+}
+
+html.dark .home-welcome h1,
+html.dark .home-section-heading h2,
+html.dark .home-aside-heading h2,
+html.dark .home-connection-name strong,
+html.dark .home-discover-card h2 {
+  color: #e2e8f0;
+}
+
+html.dark .home-welcome-subtitle,
+html.dark .home-empty-copy,
+html.dark .home-connections-empty p,
+html.dark .home-discover-card p {
+  color: #a7b4c7;
+}
+
+html.dark .home-status-panel,
+html.dark .home-empty,
+html.dark .home-aside-card,
+html.dark .home-discover-card,
+html.dark .home-post-list .post-card {
+  border-color: #29384d;
+  background-color: #111c2e;
+}
+
+html.dark .home-discover-card {
+  background-image: linear-gradient(145deg, #16243a, #111c2e);
+}
+
+html.dark .home-connection,
+html.dark .home-aside-footer {
+  border-color: #29384d;
+}
+
+html.dark .home-button-secondary {
+  border-color: #394b63;
+  background-color: #1a2a40;
+  color: #d5e4f8;
+}
+
+html.dark .home-button-secondary:hover {
+  background-color: #223753;
+}
+
+html.dark .header-icon-button:hover,
+html.dark .profile-menu-button:hover,
+html.dark .profile-menu-button-open {
+  border-color: #344861;
+  background-color: #1e293b;
+}
+
+html.dark .mobile-menu-link {
+  color: #cbd5e1;
+}
+
+html.dark .mobile-menu-link:hover,
+html.dark .mobile-menu-link-active {
+  background-color: #142b49;
+  color: #93c5fd;
+}
+
+html.dark .card,
+html.dark .post-card {
+  border-color: #29384d;
+  background-color: #111c2e;
+}
+
+html.dark .skeleton,
+html.dark [class~="animate-pulse"][class~="bg-slate-100"] {
+  background-color: #26354a;
+}
+
+html.dark .post-card:hover,
+html.dark .home-post-list .post-card:hover {
+  box-shadow: 0 13px 32px rgba(0, 0, 0, 0.24);
+}
+
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  scroll-behavior: auto !important;
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}

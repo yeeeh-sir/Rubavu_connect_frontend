@@ -3,10 +3,14 @@ import { io } from 'socket.io-client';
 let socket = null;
 let presenceSocket = null;
 
+function getSocketUrl() {
+  const apiUrl = import.meta.env.VITE_API_URL || '/api';
+  return new URL(apiUrl, window.location.origin).origin;
+}
+
 export function getSocket(token) {
   if (!socket) {
-    const url = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    socket = io(url, {
+    socket = io(getSocketUrl(), {
       auth: { token },
       transports: ['websocket', 'polling'],
       autoConnect: false,
@@ -37,8 +41,7 @@ export function connectPresenceSocket(token) {
     if (!presenceSocket.connected) presenceSocket.connect();
     return presenceSocket;
   }
-  const url = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-  presenceSocket = io(url, {
+  presenceSocket = io(getSocketUrl(), {
     auth: { token },
     transports: ['websocket', 'polling'],
     autoConnect: true,
