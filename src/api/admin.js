@@ -10,6 +10,8 @@ export const updateUserVerification = (id, is_verified) =>
   api.patch(`/admin/users/${id}/verify`, { is_verified });
 export const updateUserEmail = (id, email) =>
   api.patch(`/admin/users/${id}/email`, { email });
+export const updateUserRole = (id, role) => api.patch(`/admin/users/${id}/role`, { role });
+export const deleteUser = (id) => api.delete(`/admin/users/${id}`);
 
 export const listPosts = (params = {}) => api.get('/admin/posts', { params });
 export const hidePost = (id, reason) => api.patch(`/admin/posts/${id}/hide`, { reason });
