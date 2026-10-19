@@ -3,6 +3,23 @@ import { login as loginApi, register as registerApi, googleLogin as googleLoginA
 
 const AuthContext = createContext(null);
 
+function resolveAuthErrorMessage(error, fallback) {
+  const data = error?.response?.data;
+
+  if (Array.isArray(data?.errors) && data.errors.length > 0) {
+    const fieldMessage = data.errors[0]?.message;
+    if (fieldMessage) return fieldMessage;
+  }
+
+  if (data?.message) return data.message;
+
+  if (error?.code === 'ERR_NETWORK' || (!error?.response && error?.request)) {
+    return 'Unable to reach the server. Please check your connection and try again.';
+  }
+
+  return fallback;
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem('user');
@@ -36,7 +53,7 @@ export function AuthProvider({ children }) {
         handleAuthSuccess({ user, token });
         return { success: true, user };
       } catch (err) {
-        const message = err.response?.data?.message || 'Login failed. Please try again.';
+        const message = resolveAuthErrorMessage(err, 'Login failed. Please try again.');
         setError(message);
         return { success: false, message };
       } finally {
@@ -56,7 +73,7 @@ export function AuthProvider({ children }) {
         handleAuthSuccess({ user, token });
         return { success: true, user };
       } catch (err) {
-        const message = err.response?.data?.message || 'Registration failed. Please try again.';
+        const message = resolveAuthErrorMessage(err, 'Registration failed. Please try again.');
         setError(message);
         return { success: false, message };
       } finally {
@@ -76,7 +93,7 @@ export function AuthProvider({ children }) {
         handleAuthSuccess({ user, token });
         return { success: true, user };
       } catch (err) {
-        const message = err.response?.data?.message || 'Google login failed. Please try again.';
+        const message = resolveAuthErrorMessage(err, 'Google login failed. Please try again.');
         setError(message);
         return { success: false, message };
       } finally {

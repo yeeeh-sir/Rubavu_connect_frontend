@@ -1,11 +1,11 @@
 import { io } from 'socket.io-client';
+import { getApiOrigin } from '../config/api';
 
 let socket = null;
 let presenceSocket = null;
 
 function getSocketUrl() {
-  const apiUrl = import.meta.env.VITE_API_URL || '/api';
-  return new URL(apiUrl, window.location.origin).origin;
+  return getApiOrigin();
 }
 
 export function getSocket(token) {
