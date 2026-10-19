@@ -73,9 +73,11 @@ export default function Login() {
   };
 
   const handleGoogleSignIn = () => {
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    if (!clientId) {
-      setFormError('Google login is not configured. Please use email login or contact the administrator.');
+    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim();
+    if (!clientId || !/^[A-Za-z0-9_-]+\.apps\.googleusercontent\.com$/.test(clientId)) {
+      setFormError(
+        'Google sign-in is unavailable because VITE_GOOGLE_CLIENT_ID is missing or invalid for this deployment. Configure the Google web client ID in Vercel and redeploy.'
+      );
       return;
     }
 
